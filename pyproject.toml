@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "cleanbib"
-version = "0.1.0"
+version = "0.1.1"
 description = 'A tool for parsing and cleaning BibTex and BibLaTex files for better LaTex bibliography formatting.'
 readme = "README.md"
 requires-python = ">=3.8"
