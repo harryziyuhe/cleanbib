@@ -23,5 +23,9 @@ Source = "https://github.com/harryziyuhe/cleanbib"
 [tool.hatch.build.targets.wheel]
 packages = ["src/cleanbib"]
 
+[tool.hatch.publish]
 [tool.hatch.publish.testpypi]
 repository = "https://test.pypi.org/legacy/"
+
+[tool.hatch.publish.pypi]
+repository = "https://upload.pypi.org/legacy/"
