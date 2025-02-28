@@ -24,7 +24,7 @@ class BibCleaner:
         self.keep_fields = self._load_keep_fields(keep_fields)
         self.authors = set()
         self.cite_keys = list()
-        self.warning_hander = WarningHandler()
+        self.warning_handler = WarningHandler()
 
     def _load_keep_fields(self, keep_fields):
         if isinstance(keep_fields, dict):
@@ -97,7 +97,7 @@ class BibCleaner:
         required_fields = self.REQUIRED_FIELDS.get(entry_type, [])
         for field in required_fields:
             if field not in fields or not fields[field].strip():
-                self.warning_hander.add_critical(
+                self.warning_handler.add_critical(
                     f"Missing required field '{field}' in @{entry_type}{{{citation_key}}}"
                 )
 
@@ -242,7 +242,7 @@ class BibCleaner:
             if response.status_code in {200, 301, 302}:
                 return doi
             else:
-                self.warning_hander.add_soft(f"DOI '{doi}' in @{citation_key} may be broken (HTTP {response.status_code}).")
+                self.warning_handler.add_soft(f"DOI '{doi}' in @{citation_key} may be broken (HTTP {response.status_code}).")
                 return ""
         except requests.RequestException:
             return doi
@@ -266,7 +266,7 @@ class BibCleaner:
                 f.write("}\n\n")
 
     def print_warnings(self):
-        print(self.warning_hander.get_warnings_text())
+        print(self.warning_handler.get_warnings_text())
     
     def process(self, progress = True, warning = True):
         self.load_bib_file()
